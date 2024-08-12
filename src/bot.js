@@ -22,9 +22,9 @@ mongoose.connect(process.env.MONGODB_URL, {})
   .catch(error => console.error('Error connecting to MongoDB: ' + error.message));
 
 // Apply middlewares
+bot.use(logMessageContentMiddleware);
 bot.use(setUserMiddleware);
 bot.use(setMessageTypeMiddleware);
-bot.use(logMessageContentMiddleware);
 bot.use(blockCheckMiddleware);
 bot.use(messageCounterMiddleware);
 bot.use(checkTextSizeMiddleware);

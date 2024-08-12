@@ -12,12 +12,12 @@ const constructMessageMiddleware = async (ctx, next) => {
             content = ctx.message.text || ctx.message.caption || '';
         } else if (ctx.callbackQuery) {
             content = ctx.callbackQuery.data;
-        } else if (ctx.my_chat_member) {
+        } else if (ctx.update.my_chat_member) {
             content = JSON.stringify(ctx.my_chat_member);
         }
 
         const messageId = ctx.message ? ctx.message.message_id : null;        
-        const date = ctx.message?.date || ctx.my_chat_member?.date || Date.now();
+        const date = ctx.message?.date || ctx.update.my_chat_member?.date || Date.now();
         const fileSize = ctx.message?.photo?.[ctx.message?.photo.length - 1]?.file_size ||
                          ctx.message?.video?.file_size ||
                          ctx.message?.audio?.file_size ||

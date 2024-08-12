@@ -17,7 +17,11 @@ function getIgnorePatterns(gitignorePath) {
     return ignore().add(gitignore).add([
         '.gitignore',
         'package-lock.json',
-        'src/utils/copyCode.js'
+        'src/utils/copyCode.js',
+        'tests/',
+        'jest.config.cjs',
+        '.babelrc',
+        
     ]);
 }
 

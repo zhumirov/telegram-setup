@@ -24,9 +24,10 @@ const determineMessageType = (ctx) => {
         return 'location';
     if (ctx.callbackQuery) 
         return 'callback';
-    if (ctx.my_chat_member) 
-        return 'system';
-
+    if (ctx.update.my_chat_member.new_chat_member.status === "kicked") 
+        return 'left';
+    if (ctx.update.my_chat_member.new_chat_member.status === "member") 
+        return 'started';
     return 'unknown';
 };
 
