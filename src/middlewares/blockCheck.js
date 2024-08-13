@@ -6,7 +6,7 @@ const blockCheckMiddleware = async (ctx, next) => {
         const user = ctx.state.user;
 
         if (user && user.blockedUntil && new Date() < new Date(user.blockedUntil)) {
-            setScenarioWithPriority(user, "blocked", 3); // Setting highest priority 3
+            setScenarioWithPriority(user, "blocked"); // No priority
         } else {
             logInfo(`User ${user.chatId} is not blocked.`);
         }

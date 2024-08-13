@@ -16,7 +16,7 @@ const constructMessageMiddleware = async (ctx, next) => {
             content = JSON.stringify(ctx.my_chat_member);
         }
 
-        const messageId = ctx.message ? ctx.message.message_id : null;        
+        const messageId = ctx.message?.message_id || ctx.callbackQuery?.message?.message_id || null;        
         const date = ctx.message?.date || ctx.update.my_chat_member?.date || Date.now();
         const fileSize = ctx.message?.photo?.[ctx.message?.photo.length - 1]?.file_size ||
                          ctx.message?.video?.file_size ||
@@ -25,9 +25,36 @@ const constructMessageMiddleware = async (ctx, next) => {
                          ctx.message?.voice?.file_size ||
                          ctx.message?.animation?.file_size ||
                          null;
+        const fileId = ctx.message?.photo?.[ctx.message?.photo.length - 1]?.file_id ||
+                        ctx.message?.video?.file_id ||
+                        ctx.message?.audio?.file_id ||
+                        ctx.message?.document?.file_id ||
+                        ctx.message?.voice?.file_id ||
+                        ctx.message?.animation?.file_id ||
+                        null;
+
+        const fileName = ctx.message?.photo?.[ctx.message?.photo.length - 1]?.file_name ||
+                        ctx.message?.video?.file_name ||
+                        ctx.message?.audio?.file_name ||
+                        ctx.message?.document?.file_name ||
+                        ctx.message?.voice?.file_name ||
+                        ctx.message?.animation?.file_name ||
+                        null;
+
+        const fileMimeType = ctx.message?.photo?.[ctx.message?.photo.length - 1]?.mime_type ||
+                        ctx.message?.video?.mime_type ||
+                        ctx.message?.audio?.mime_type ||
+                        ctx.message?.document?.mime_type ||
+                        ctx.message?.voice?.mime_type ||
+                        ctx.message?.animation?.mime_type ||
+                        null;
 
         const message = new Message(chatId, messageType, messageId, content, date);
         message.fileSize = fileSize;
+        message.fileId = fileId;
+        message.fileName = fileName;
+        message.fileMimeType = fileMimeType;
+
 
         // Add keyboard info if it exists
         if (ctx.callbackQuery && ctx.callbackQuery.message) {

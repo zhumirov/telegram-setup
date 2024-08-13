@@ -8,7 +8,7 @@ const checkTextSizeMiddleware = async (ctx, next) => {
 
         // If the message text exceeds the MAX_TEXT_SIZE, update the scenario with priority
         if (ctx.message?.text && ctx.message.text.length > MAX_TEXT_SIZE) {
-            setScenarioWithPriority(user, "too_big_text", 1); // setting priority 1
+            setScenarioWithPriority(user, "too_big_text"); // setting priority 1
         }
     } catch (error) {
         logError(`Error in checkTextSizeMiddleware: ${error}`);

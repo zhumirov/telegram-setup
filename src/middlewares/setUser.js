@@ -9,8 +9,8 @@ const setUserMiddleware = async (ctx, next) => {
 
         if (!user) {
             user = new User({ chatId });
-            setScenarioWithPriority(user, "start", 0); 
-            notifyAdminTelegram(`We have a new user: ${JSON.stringify(user)}`);
+            // setScenarioWithPriority(user, "start", 0); 
+            // notifyAdminTelegram(`We have a new user: ${JSON.stringify(user)}`);
             await user.save();
         }
 

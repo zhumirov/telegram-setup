@@ -10,6 +10,8 @@ import blockCheckMiddleware from './middlewares/blockCheck.js';
 import messageCounterMiddleware from './middlewares/messageCounter.js';
 import checkTextSizeMiddleware from './middlewares/checkTextSize.js';
 import constructMessageMiddleware from './middlewares/constructMessage.js';
+import commandHandlerMiddleware from './middlewares/commandHandler.js';
+import callbackHandlerMiddleware from './middlewares/callbackHandler.js'; 
 
 import handleMessage from './handlers/index.js';
 
@@ -29,6 +31,8 @@ bot.use(blockCheckMiddleware);
 bot.use(messageCounterMiddleware);
 bot.use(checkTextSizeMiddleware);
 bot.use(constructMessageMiddleware);
+bot.use(commandHandlerMiddleware);
+bot.use(callbackHandlerMiddleware); 
 
 // Use handler to reply with ctx.state
 bot.on('message', handleMessage);

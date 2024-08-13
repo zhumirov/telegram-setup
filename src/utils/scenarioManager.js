@@ -1,19 +1,17 @@
-const setScenarioWithPriority = (user, newScenario, newPriority = 0) => {
-    if (!user._priority) {
-        user._priority = {}; // Initialize _priority object if not present
+import { basicScenarios, commandScenarios, callbackScenarios } from '../scenarios/scenarioPriorities.js';
+
+const allScenarios = { ...basicScenarios, ...commandScenarios, ...callbackScenarios };
+
+const setScenarioWithPriority = (user, newScenario, priority = -1) => {
+    const newPriority = allScenarios[newScenario] || priority; // Default priority to 0 if not set
+    const currentPriority = user.scenario.priority || -1; // Default priority to 0 if not set
+
+    if (newPriority == 0) {
+        user.scenario = { value: newScenario, priority: newPriority };
     }
 
-    // If newPriority is 0, set the scenario and reset priority
-    if (newPriority === 0) {
-        user.scenario = newScenario;
-        user._priority.scenario = newPriority;
-        return;
-    }
-
-    const currentPriority = user._priority.scenario || 0; // Default priority to 0 if not set
     if (newPriority >= currentPriority) {
-        user.scenario = newScenario;
-        user._priority.scenario = newPriority;
+        user.scenario = { value: newScenario, priority: newPriority };
     }
 };
 

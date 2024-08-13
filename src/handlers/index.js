@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import { logInfo, logError, notifyAdminTelegram } from "../utils/logger.js"
 import dotenv from 'dotenv';
+import setScenarioWithPriority from '../utils/scenarioManager.js';
 
 dotenv.config();
 
@@ -15,8 +16,8 @@ const handleMessage = async (ctx) => {
 
     try {
         const user = ctx.state.user;
+        setScenarioWithPriority(user, "regular", 0);
         await User.updateOne({ chatId: user.chatId }, user, { upsert: true });
-        
         logInfo(`User ${user.chatId} saved to the database`);
     } catch (error) {
         await logError(`Error saving user in handler: ${error}`);

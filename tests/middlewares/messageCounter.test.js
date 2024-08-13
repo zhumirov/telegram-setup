@@ -14,7 +14,7 @@ describe('messageCounterMiddleware', () => {
                         date: new Date(Date.now() - 86400000).toISOString(),
                         count: 0,
                     },
-                    scenario: 'regular',
+                    scenario: { value: 'regular', priority: 0 },
                 },
             },
         };
@@ -38,7 +38,8 @@ describe('messageCounterMiddleware', () => {
         ctx.state.user.messageCount.date = new Date().toISOString();
         ctx.state.user.messageCount.count = 5;
         await messageCounterMiddleware(ctx, next);
-        expect(ctx.state.user.scenario).toBe('limited');
+        expect(ctx.state.user.scenario.value).toBe('limited');
+        expect(ctx.state.user.scenario.priority).toBe(5);
         expect(next).toHaveBeenCalled();
     });
 });

@@ -18,7 +18,7 @@ const messageCounterMiddleware = async (ctx, next) => {
             }
 
             if (user.messageCount.count > MESSAGE_LIMIT) {
-                setScenarioWithPriority(user, "limited", 2); // setting priority 2
+                setScenarioWithPriority(user, "limited"); // setting priority 2
             }
 
             logInfo(`User ${user.chatId} sent ${user.messageCount.count} messages today.`);

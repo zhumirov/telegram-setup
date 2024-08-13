@@ -7,7 +7,10 @@ const userSchema = new mongoose.Schema({
     interfaceLanguage: { type: String, default: "English" },
     channelMembership: { type: Boolean, default: false },
     referralSource: { type: String, default: "none" },
-    scenario: { type: String, default: "regular" },
+    scenario: { 
+      value: { type: String, default: "regular" },
+      priority: { type: Number, default: 0 }
+    },
     blockedUntil: { type: Date, default: null },
     messageCount: { 
       date: { type: Date, default: null },

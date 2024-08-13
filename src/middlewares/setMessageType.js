@@ -1,4 +1,9 @@
+import setScenarioWithPriority from "../utils/scenarioManager.js";
+
 const determineMessageType = (ctx) => {
+
+    const user = ctx.state.user;
+
     if (ctx.message?.text) 
         return ctx.message.text.startsWith('/') ? 'command' : 'text';
     if (ctx.message?.photo) 
@@ -24,20 +29,20 @@ const determineMessageType = (ctx) => {
         return 'location';
     if (ctx.callbackQuery) 
         return 'callback';
-    if (ctx.update.my_chat_member.new_chat_member.status === "kicked") 
+    if (ctx.update.my_chat_member.new_chat_member.status === "kicked") {
+        setScenarioWithPriority(user, "deactivate"); 
         return 'left';
-    if (ctx.update.my_chat_member.new_chat_member.status === "member") 
+    }
+    if (ctx.update.my_chat_member.new_chat_member.status === "member") {
+        setScenarioWithPriority(user, "activate"); 
         return 'started';
+    }
     return 'unknown';
 };
 
 const setMessageTypeMiddleware = async (ctx, next) => {
     try {
         ctx.state.messageType = determineMessageType(ctx);
-        if (ctx.state.messageType === 'system') {
-            ctx.state.user.scenario = "systemMessage";
-            if (ctx.state.user?.save) await ctx.state.user.save();
-        }
     } catch (error) {
         console.error(`Error in setMessageTypeMiddleware: ${error}`);
     }
