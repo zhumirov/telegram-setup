@@ -1,9 +1,15 @@
-import { basicScenarios, commandScenarios, callbackScenarios } from './configPriority.js';
+import { basicScenarios, commandScenarios, callbackScenarios } from '../scenarios/configPriority.js';
 
 const allScenarios = { ...basicScenarios, ...commandScenarios, ...callbackScenarios };
 
 const setScenarioWithPriority = (user, newScenario, priority = -1) => {
-    const newPriority = allScenarios[newScenario] || priority; // Default priority to 0 if not set
+    console.log(allScenarios[newScenario]);
+    var newPriority = -1;
+    if(allScenarios[newScenario] >= 0){
+        newPriority = allScenarios[newScenario]
+    } else {
+        newPriority = allScenarios[newScenario] = priority;
+    }
     const currentPriority = user.scenario.priority || -1; // Default priority to 0 if not set
 
     if (newPriority == 0) {
