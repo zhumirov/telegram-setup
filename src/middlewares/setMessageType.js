@@ -1,4 +1,4 @@
-import setScenarioWithPriority from "../utils/scenarioManager.js";
+import setScenarioWithPriority from "../scenarios/scenarioManager.js";
 
 const determineMessageType = (ctx) => {
 

@@ -1,5 +1,5 @@
 import { logInfo, logError } from "../utils/logger.js";
-import setScenarioWithPriority from "../utils/scenarioManager.js";
+import setScenarioWithPriority from "../scenarios/scenarioManager.js";
 
 const messageCounterMiddleware = async (ctx, next) => {
     try {

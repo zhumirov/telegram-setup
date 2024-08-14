@@ -1,4 +1,4 @@
-import { basicScenarios, commandScenarios, callbackScenarios } from '../scenarios/scenarioPriorities.js';
+import { basicScenarios, commandScenarios, callbackScenarios } from './configPriority.js';
 
 const allScenarios = { ...basicScenarios, ...commandScenarios, ...callbackScenarios };
 

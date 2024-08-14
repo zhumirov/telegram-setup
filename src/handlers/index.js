@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import { logInfo, logError, notifyAdminTelegram } from "../utils/logger.js"
 import dotenv from 'dotenv';
-import setScenarioWithPriority from '../utils/scenarioManager.js';
+import setScenarioWithPriority from '../scenarios/scenarioManager.js';
 
 dotenv.config();
 

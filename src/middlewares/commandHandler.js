@@ -1,5 +1,5 @@
 import { logError } from "../utils/logger.js";
-import setScenarioWithPriority from "../utils/scenarioManager.js";
+import setScenarioWithPriority from "../scenarios/scenarioManager.js";
 import commandToScenarioMap from "../scenarios/commandToScenarioMap.js";
 
 const commandHandlerMiddleware = async (ctx, next) => {
